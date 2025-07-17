@@ -1,0 +1,36 @@
+name: Python package
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest pytest-benchmark
+
+      - name: environment check
+        run: |
+            cat /proc/cpuinfo
+            ram_kb=$(grep MemTotal /proc/meminfo | awk '{print $2}')
+            ram_gb=$(echo "scale=1; $ram_kb/1024/1024" | bc)
+            echo "Your runtime has ${ram_gb} GB of available RAM"
+            lsb_release -a
+      - name: Run tests
+        run: |
+          pytest tests --benchmark-min-rounds=10 --benchmark-warmup-iterations=100 --benchmark-disable-gc --benchmark-min-time=0.000005 --benchmark-max-time=1.0 --benchmark-warmup --benchmark-calibration-precision=10
