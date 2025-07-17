@@ -2,7 +2,14 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "charliermarsh.ruff",
     "python.testing.pytestArgs": [
-        "tests"
+        "tests",
+        "--benchmark-min-rounds=10",
+        "--benchmark-warmup-iterations=100",
+        "--benchmark-disable-gc",
+        "--benchmark-min-time=0.000005",
+        "--benchmark-max-time=1.0",
+        "--benchmark-warmup",
+        "--benchmark-calibration-precision=10",
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
