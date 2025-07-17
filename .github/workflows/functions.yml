@@ -34,12 +34,5 @@ jobs:
       - name: Run tests
         run: |
           export PYTHONPATH=.
-          pytest -v --tb=short tests/test_benchmark.py \
-            --benchmark-min-rounds=10 \
-            --benchmark-warmup-iterations=100 \
-            --benchmark-disable-gc \
-            --benchmark-min-time=0.000005 \
-            --benchmark-max-time=1.0 \
-            --benchmark-warmup \
-            --benchmark-calibration-precision=10 \
-            --benchmark-save=bench.json
+          pytest -v --tb=short --junitxml=pytest-report.xml \
+          tests/test_functions.py \

@@ -11,7 +11,7 @@ def generateSortData(data: list, num: int = 8000):
         data.append(random.randint(0, num))
 
 
-def sortLibSort(data) -> list[int]:
+def builtInSort(data) -> list[int]:
     """
     リスト型のソートメソッドを利用して、データをソート
     """
@@ -20,9 +20,10 @@ def sortLibSort(data) -> list[int]:
 
 def bubbleSort(data):
     num = len(data)
-    for i in range(num - 1):
-        if data[i] > data[i + 1]:
-            data[i], data[i + 1] = data[i + 1], data[i]
+    for i in range(num):
+        for j in range(0, num - i - 1):
+            if data[j] > data[j + 1]:
+                data[j], data[j + 1] = data[j + 1], data[j]
     return data
 
 def insertionSort(data):

@@ -1,6 +1,6 @@
 from sort import (
     generateSortData,
-    sortLibSort,
+    builtInSort,
     bubbleSort,
     quickSort,
     mergeSort,
@@ -9,7 +9,7 @@ from sort import (
 )
 import pytest
 
-test_pattern = [1000, 2000, 4000, 8000]
+test_pattern = [1000, 2000, 4000, 8000, 16000, 32000, 64000]
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -25,7 +25,7 @@ def test_generateSortData(
 
 
 @pytest.mark.parametrize("num", test_pattern)
-def test_sortdata(
+def test_builtInSort(
     benchmark,
     num: int,
 ):
@@ -34,7 +34,7 @@ def test_sortdata(
     """
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(sortLibSort, data)
+    benchmark(builtInSort, data)
 
 
 @pytest.mark.parametrize("num", test_pattern)
