@@ -1,4 +1,4 @@
-from sort import generateSortData, sortLibSort
+from sort import generateSortData, sortLibSort, bubbleSort
 import pytest
 
 test_pattern = [1000, 2000, 4000, 8000]
@@ -27,3 +27,15 @@ def test_sortdata(
     data: list[int] = []
     generateSortData(data, num)
     benchmark(sortLibSort, data)
+
+@pytest.mark.parametrize("num", test_pattern)
+def test_bubbleSort(
+    benchmark,
+    num: int,
+):
+    """
+    バブルソートを用いたソートリスト
+    """
+    data: list[int] = []
+    generateSortData(data, num)
+    benchmark(bubbleSort, data)

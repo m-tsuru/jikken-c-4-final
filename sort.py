@@ -17,3 +17,10 @@ def sortLibSort(data) -> list[int]:
     """
     data.sort()
     return data
+
+def bubbleSort(data):
+    num = len(data)
+    for i in range(num - 1):
+        if data[i] > data[i + 1]:
+            data[i], data[i + 1] = data[i + 1], data[i]
+    return data
