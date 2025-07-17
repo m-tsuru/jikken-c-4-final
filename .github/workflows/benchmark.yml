@@ -43,3 +43,9 @@ jobs:
             --benchmark-warmup \
             --benchmark-calibration-precision=10 \
             --benchmark-save=bench.json
+
+      - name: Upload pytest report
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-report
+          path: bench.json

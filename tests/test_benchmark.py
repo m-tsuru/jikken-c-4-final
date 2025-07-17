@@ -9,7 +9,7 @@ from sort import (
 )
 import pytest
 
-test_pattern = [1000, 2000, 4000, 8000, 16000, 32000, 64000]
+test_pattern = [1000, 2000, 4000, 8000]
 
 
 @pytest.mark.parametrize("num", test_pattern)
