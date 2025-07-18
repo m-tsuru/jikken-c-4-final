@@ -10,6 +10,8 @@ from sort import (
 import pytest
 
 test_pattern = [1000, 2000, 4000, 8000]
+rounds = 100
+warmup_rounds = 10
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -21,7 +23,13 @@ def test_generateSortData(
     ソート対象のリストを生成するベンチマーク
     """
     data: list[int] = []
-    benchmark(generateSortData, data, num)
+    benchmark.pedantic(
+        generateSortData,
+        args=(data,),
+        kwargs={"num": num},
+        rounds=rounds,
+        warmup_rounds=warmup_rounds,
+    )
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -34,8 +42,11 @@ def test_builtInSort(
     """
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(builtInSort, data)
 
+    def sort():
+        return builtInSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
 
 @pytest.mark.parametrize("num", test_pattern)
 def test_bubbleSort(
@@ -45,9 +56,14 @@ def test_bubbleSort(
     """
     バブルソートを用いたソートリスト
     """
+
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(bubbleSort, data)
+
+    def sort():
+        return bubbleSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -58,9 +74,14 @@ def test_quickSort(
     """
     クイックソートを用いたソートリスト
     """
+
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(quickSort, data)
+
+    def sort():
+        return quickSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -71,9 +92,14 @@ def test_mergeSort(
     """
     マージソートを用いたソートリスト
     """
+
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(mergeSort, data)
+
+    def sort():
+        return mergeSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -84,9 +110,14 @@ def test_selectionSort(
     """
     選択ソートを用いたソートリスト
     """
+
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(selectionSort, data)
+
+    def sort():
+        return selectionSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
 
 
 @pytest.mark.parametrize("num", test_pattern)
@@ -97,6 +128,11 @@ def test_insertionSort(
     """
     挿入ソートを用いたソートリスト
     """
+
     data: list[int] = []
     generateSortData(data, num)
-    benchmark(insertionSort, data)
+
+    def sort():
+        return insertionSort(data.copy())
+
+    benchmark.pedantic(sort, rounds=rounds, warmup_rounds=warmup_rounds)
