@@ -42,10 +42,19 @@ jobs:
             --benchmark-max-time=1.0 \
             --benchmark-warmup \
             --benchmark-calibration-precision=10 \
-            --benchmark-save=benchmark
+            --benchmark-save=benchmark \
+            --benchmark-json=benchmark_result.json \
+
 
       - name: Upload pytest report
         uses: actions/upload-artifact@v4
         with:
           name: benchmark-report
           path: .benchmarks/Linux-CPython-3.13-64bit/0001_benchmark.json
+
+
+      - name: Upload pytest report
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-report
+          path: .benchmarks/Linux-CPython-3.13-64bit/benchmark_result.json
