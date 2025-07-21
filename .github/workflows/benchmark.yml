@@ -42,8 +42,8 @@ jobs:
             --benchmark-max-time=1.0 \
             --benchmark-warmup \
             --benchmark-calibration-precision=10 \
-            --benchmark-save-data \
-            --benchmark-json=benchmark_result.json \
+            --benchmark-save=benchmark \
+            --benchmark-save-data
 
 
       - name: Upload pytest report
